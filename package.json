@@ -2,7 +2,7 @@
 	"name": "event-schedule",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "svelte-kit dev",
+		"dev": "svelte-kit dev --open",
 		"build": "svelte-kit build",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
@@ -22,5 +22,8 @@
 		"prettier-plugin-svelte": "^2.7.0",
 		"svelte": "^3.44.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"svelte-local-storage-store": "^0.2.6"
+	}
 }
