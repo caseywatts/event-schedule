@@ -2,3 +2,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  font-family: "Quicksand", sans-serif;
+}
+
+h2 {
+  @apply text-2xl
+}
+
+.break {
+  @apply bg-yellow-100
+}
+
+.keynote {
+  @apply bg-purple-100
+}

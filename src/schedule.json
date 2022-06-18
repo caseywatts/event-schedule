@@ -1,10 +1,43 @@
 {
 	"events": [
 		{
-			"name": "lol"
+			"name": "Opening Keynote",
+			"startTime": "9am",
+			"endTime": "10am",
+			"duration": 60,
+			"type": "keynote"
 		},
 		{
-			"name": "lol2"
+			"name": "Break",
+			"startTime": "10am",
+			"endTime": "10:30am",
+			"duration": 30,
+			"type": "break"
+		},
+		{
+			"name": "Breaking up with the bundle",
+			"startTime": "10:40am",
+			"endTime": "11:10am",
+			"duration": 30
+		},
+		{
+			"name": "Break",
+			"startTime": "11:10am",
+			"endTime": "11:40am",
+			"duration": 30,
+			"type": "break"
+		},
+		{
+			"name": "React-ing to Hotwire",
+			"startTime": "11:40am",
+			"endTime": "12:10pm",
+			"duration": 30
+		},
+		{
+			"name": "Lunch",
+			"startTime": "12:10pm",
+			"endTime": "1:30pm",
+			"duration": 90
 		}
 	]
 }
