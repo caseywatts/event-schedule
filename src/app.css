@@ -18,3 +18,7 @@ h2 {
 .keynote {
   @apply bg-purple-100
 }
+
+.button {
+  @apply border p-2 m-4 rounded-xl bg-slate-500 text-slate-50 shadow-md shadow-slate-900 hover:shadow-slate-700
+}
