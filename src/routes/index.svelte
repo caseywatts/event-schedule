@@ -1,7 +1,9 @@
 <script>
-  import schedule from "../schedule.json"
-  // import { schedule } from "../stores.js"
-  const scheduleJSONString = JSON.stringify(schedule);
+  // import schedule from "../schedule.json"
+  import { schedule } from "../stores.js"
+  import EventsList from "../lib/EventsList.svelte"
+  console.log($schedule)
+  // const scheduleJSONString = JSON.stringify($schedule);
   const hours = [
     "9am",
     "10am",
@@ -31,15 +33,7 @@
     {/each}
   </div>
   <div class="">
-    {#each schedule.events as event}
-      <div class="p-2" style="height:{zoomScale * event.duration}em">
-        <div class="mx-auto h-full w-full sm:w-1/2 md:w-1/3 bg-slate-200 p-2 rounded-md border border-slate-400 {event.type}">
-          <div class="flex">
-            <span class="grow text-lg font-medium"><input type="text" class="w-full" value={event.name}/></span>
-            <span>{event.startTime}–{event.endTime}</span>
-          </div>
-        </div>
-      </div>
-    {/each}
+    {$schedule.length}
+    <EventsList events={$schedule.events} {zoomScale}></EventsList>
   </div>
 </div>
