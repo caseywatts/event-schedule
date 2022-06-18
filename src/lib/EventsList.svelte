@@ -5,5 +5,5 @@
 </script>
 
 {#each events as event}
-<Event {event} {zoomScale}></Event>
+  <Event bind:event={event} {zoomScale}></Event>
 {/each}
