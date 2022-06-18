@@ -2,6 +2,6 @@
   import { preferences } from '../stores'
 </script>
 <div>
-  <textarea bind:value={$preferences.dark}></textarea>
+  <textarea bind:value={$preferences.theme}></textarea>
 </div>
 
