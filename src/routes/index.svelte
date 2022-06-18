@@ -33,7 +33,6 @@
     {/each}
   </div>
   <div class="">
-    {$schedule.length}
-    <EventsList events={$schedule.events} {zoomScale}></EventsList>
+    <EventsList bind:events={$schedule.events} {zoomScale}></EventsList>
   </div>
 </div>
