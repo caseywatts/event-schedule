@@ -1,7 +1,11 @@
 <script>
-  import { preferences } from '../stores'
+  import schedule from "../schedule.json"
+  const scheduleJSONString = JSON.stringify(schedule);
 </script>
 <div>
-  <textarea bind:value={$preferences.theme}></textarea>
+  {scheduleJSONString}
+  {#each schedule.events as event}
+    <textarea bind:value={event.name}></textarea>
+  {/each}
 </div>
 
