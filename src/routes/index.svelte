@@ -1,9 +1,7 @@
 <script>
-  // import schedule from "../schedule.json"
+  import defaultSchedule from "../schedule.json"
   import { schedule } from "../stores.js"
   import EventsList from "../lib/EventsList.svelte"
-  console.log($schedule)
-  // const scheduleJSONString = JSON.stringify($schedule);
   const hours = [
     "9am",
     "10am",
@@ -20,12 +18,16 @@
     "9pm",
   ]
   const zoomScale = 0.2;
+  const resetSchedule = () => {
+    $schedule = defaultSchedule;
+  }
 </script>
 
 <!-- {scheduleJSONString} -->
 <div class="w-full m-8">
 
   <h2>Schedule</h2>
+  <button class="button" on:click={resetSchedule}>reset to template schedule</button>
 
   <div class="absolute w-full -z-10">
     {#each hours as hour}
