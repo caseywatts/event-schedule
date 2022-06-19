@@ -4,6 +4,7 @@
 	import DurationInput from "../lib/DurationInput.svelte"
 	export let event = {};
 	export let zoomScale = 0.1;
+	const timeFormat = "h:mma";
 
 	let computedStartTime;
   let startTry1;
@@ -11,10 +12,11 @@
   $: startTry1 = DateTime.fromFormat(event.startTime, "ha")
   $: startTry2 = DateTime.fromFormat(event.startTime, "h:mma")
   $: if (startTry1.isValid) {
-    computedStartTime = startTry1.toLocaleString(DateTime.DATETIME_FULL) 
+    computedStartTime = startTry1 
   }  else if (startTry2.isValid) {
-    computedStartTime = startTry2.toLocaleString(DateTime.DATETIME_FULL) 
+    computedStartTime = startTry2
   }
+	$: computedStartTimeFormatted = computedStartTime.toFormat(timeFormat);
 
 	let computedEndTime;
   let endTry1;
@@ -22,10 +24,14 @@
   $: endTry1 = DateTime.fromFormat(event.endTime, "ha")
   $: endTry2 = DateTime.fromFormat(event.endTime, "h:mma")
   $: if (endTry1.isValid) {
-    computedEndTime = endTry1.toLocaleString(DateTime.DATETIME_FULL) 
+    computedEndTime = endTry1
   }  else if (endTry2.isValid) {
-    computedEndTime = endTry2.toLocaleString(DateTime.DATETIME_FULL) 
+    computedEndTime = endTry2
   }
+	$: computedEndTimeFormatted = computedEndTime.toFormat(timeFormat);
+
+	let computedDuration;
+	// $: computedDuration = 
 
 </script>
 
@@ -42,8 +48,8 @@
 		<div>
 			Duration: <DurationInput bind:duration={event.duration}/>
 		</div>
-		<div>
-			{computedStartTime}<br>{computedEndTime}
+		<div class="lowercase">
+			{computedStartTimeFormatted}<br>{computedEndTimeFormatted}
 		</div>
 	</div>
 </div>
