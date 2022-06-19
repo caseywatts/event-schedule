@@ -2,12 +2,15 @@ import { DateTime } from 'luxon';
 const timeFormat = 'h:mm a';
 
 function parseTime(dt) {
-	let startTry1 = DateTime.fromFormat(dt, 'ha');
-	let startTry2 = DateTime.fromFormat(dt, 'h:mma');
-	if (startTry1.isValid) {
-		return startTry1;
-	} else if (startTry2.isValid) {
-		return startTry2;
+	let try1 = DateTime.fromFormat(dt, 'ha');
+	let try2 = DateTime.fromFormat(dt, 'h:mma');
+	let try3 = DateTime.fromFormat(dt, 'h:mm a');
+	if (try1.isValid) {
+		return try1;
+	} else if (try2.isValid) {
+		return try2;
+	} else if (try3.isValid) {
+		return try3;
 	}
 }
 
