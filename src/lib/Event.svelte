@@ -1,10 +1,11 @@
 <script>
-	import { DateTime } from "luxon";
+	import { DateTime, Interval } from "luxon";
 	import TimeInput from "../lib/TimeInput.svelte"
 	import DurationInput from "../lib/DurationInput.svelte"
 	export let event = {};
 	export let zoomScale = 0.1;
 	const timeFormat = "h:mm a";
+	// const timeFormat = "DD h:mm a";
 
 	let computedStartTime;
   let startTry1;
@@ -27,11 +28,14 @@
     computedEndTime = endTry1
   }  else if (endTry2.isValid) {
     computedEndTime = endTry2
-  }
+  } else {
+		computedEndTime = computedStartTime.plus({ minutes: event.duration })
+	}
 	$: computedEndTimeFormatted = computedEndTime.toFormat(timeFormat);
 
 	let computedDuration;
-	$: computedDuration = computedEndTime.diff(computedStartTime, "minutes").toObject().minutes;
+	// $: computedDuration = computedEndTime.diff(computedStartTime, "minutes").toObject().minutes;
+	$: computedDuration = Interval.fromDateTimes(computedStartTime, computedEndTime).length('minutes');
 
 </script>
 
