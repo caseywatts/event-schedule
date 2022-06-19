@@ -1,4 +1,4 @@
-import { DateTime, Interval } from 'luxon';
+import { DateTime } from 'luxon';
 const timeFormat = 'h:mm a';
 
 function parseTime(dt) {
@@ -12,20 +12,9 @@ function parseTime(dt) {
 }
 
 export default class Event {
-	constructor({ startTime, endTime, duration, name, type }) {
-		if (startTime) {
-			this.inputStartTime = startTime;
-		}
-		if (endTime || duration) {
-			if (endTime) {
-				this.inputEndTime = endTime;
-			}
-			if (duration) {
-				this.inputDuration = duration;
-			}
-		} else {
-			throw 'requires either an endTime or a duration';
-		}
+	constructor({ startTime, duration, name, type }) {
+		this.inputStartTime = startTime;
+		this.inputDuration = duration || 30;
 		this.inputName = name;
 		this.inputType = type;
 	}
@@ -50,21 +39,10 @@ export default class Event {
 		this.inputStartTime = parseTime(time);
 	}
 	get endTime() {
-		if (this.inputEndTime) {
-			return parseTime(this.inputEndTime);
-		} else {
-			return this.startTime.plus({ minutes: this.duration });
-		}
-	}
-	set endTime(time) {
-		this.inputEndTime = parseTime(time);
+		return this.startTime.plus({ minutes: this.duration });
 	}
 	get duration() {
-		if (this.inputDuration) {
-			return this.inputDuration;
-		} else {
-			return Interval.fromDateTimes(this.startTime, this.endTime).length('minutes');
-		}
+		return this.inputDuration;
 	}
 	set duration(duration) {
 		this.inputDuration = duration;

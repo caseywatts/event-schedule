@@ -11,14 +11,10 @@
 	$: event = new Event({
 		startTime: eventInput.startTime,
 		duration: eventInput.duration,
-		endTime: eventInput.endTime,
 		name: eventInput.name,
 		type: eventInput.type
 	});
 
-	$: computedStartTimeFormatted = event.startTimeFormatted;
-	$: computedEndTimeFormatted = event.endTimeFormatted;
-	$: computedDuration = event.duration;
 </script>
 
 <div class="p-2" style="height:{zoomScale * event.duration}em">
@@ -28,17 +24,11 @@
 				<input type="text" class="w-full" bind:value={eventInput.name}/>
 			</span>
 			<span>
-				<TimeInput bind:time={eventInput.startTime}></TimeInput>–<TimeInput bind:time={eventInput.endTime}></TimeInput>
+				<TimeInput bind:time={eventInput.startTime}></TimeInput> for <DurationInput bind:duration={eventInput.duration}/> minutes
 			</span>
 		</div>
-		<div>
-			Duration: <DurationInput bind:duration={eventInput.duration}/>
-		</div>
 		<div class="lowercase">
-			{computedStartTimeFormatted}<br>{computedEndTimeFormatted}
-		</div>
-		<div>
-			{computedDuration} min
+			{event.startTimeFormatted} to {event.endTimeFormatted} ({event.duration} min)
 		</div>
 	</div>
 </div>

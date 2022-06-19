@@ -4,7 +4,7 @@ import Event from '../src/lib/event.js';
 test('start time and end time with minutes', async ({ page }) => {
 	const event = new Event({
 		startTime: '1:30pm',
-		endTime: '2:45pm'
+		duration: 75
 	});
 
 	expect(event.startTimeFormatted).toBe('1:30 PM');
@@ -15,7 +15,7 @@ test('start time and end time with minutes', async ({ page }) => {
 test('start time and end time without minutes', async ({ page }) => {
 	const event = new Event({
 		startTime: '1pm',
-		endTime: '3pm'
+		duration: 120
 	});
 
 	expect(event.startTimeFormatted).toBe('1:00 PM');
