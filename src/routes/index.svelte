@@ -2,9 +2,6 @@
   import defaultSchedule from "../schedule.json"
   import { schedule } from "../stores.js"
   import EventsList from "../lib/EventsList.svelte"
-  import { DateTime } from "luxon";
-  let lol = "12pm"
-  $: lol2 = DateTime.fromFormat(lol, "ha").toLocaleString(DateTime.DATETIME_FULL);
   const hours = [
     "9am",
     "10am",
@@ -31,10 +28,6 @@
 
   <h2>Schedule</h2>
   <button class="button" on:click={resetSchedule}>reset to template schedule</button>
-  <div>
-    <input type="text" bind:value={lol}/>
-    <input type="text" value={lol2}/>
-  </div>
 
   <div class="absolute w-full -z-10">
     {#each hours as hour}
