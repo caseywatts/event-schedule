@@ -1,4 +1,5 @@
 import { writable } from 'svelte-local-storage-store';
+
 // console.log('lol');
 import defaultSchedule from './schedule.json';
 
@@ -11,3 +12,5 @@ export const schedule = writable('schedule', defaultSchedule);
 // // 	pane: '50%'
 // // });
 // // console.log(localStorage);
+
+// export const scheduleComputed =
