@@ -2,55 +2,37 @@
 	import { DateTime, Interval } from "luxon";
 	import TimeInput from "../lib/TimeInput.svelte"
 	import DurationInput from "../lib/DurationInput.svelte"
-	export let event = {};
+	export let eventInput = {};
 	export let zoomScale = 0.1;
 	const timeFormat = "h:mm a";
+	import Event from "./event.js";
 	// const timeFormat = "DD h:mm a";
 
-	let computedStartTime;
-  let startTry1;
-  let startTry2;
-  $: startTry1 = DateTime.fromFormat(event.startTime, "ha")
-  $: startTry2 = DateTime.fromFormat(event.startTime, "h:mma")
-  $: if (startTry1.isValid) {
-    computedStartTime = startTry1 
-  }  else if (startTry2.isValid) {
-    computedStartTime = startTry2
-  }
-	$: computedStartTimeFormatted = computedStartTime.toFormat(timeFormat);
+	$: event = new Event({
+		startTime: eventInput.startTime,
+		duration: eventInput.duration,
+		endTime: eventInput.endTime,
+		name: eventInput.name,
+		type: eventInput.type
+	});
 
-	let computedEndTime;
-  let endTry1;
-  let endTry2;
-  $: endTry1 = DateTime.fromFormat(event.endTime, "ha")
-  $: endTry2 = DateTime.fromFormat(event.endTime, "h:mma")
-  $: if (endTry1.isValid) {
-    computedEndTime = endTry1
-  }  else if (endTry2.isValid) {
-    computedEndTime = endTry2
-  } else {
-		computedEndTime = computedStartTime.plus({ minutes: event.duration })
-	}
-	$: computedEndTimeFormatted = computedEndTime.toFormat(timeFormat);
-
-	let computedDuration;
-	// $: computedDuration = computedEndTime.diff(computedStartTime, "minutes").toObject().minutes;
-	$: computedDuration = Interval.fromDateTimes(computedStartTime, computedEndTime).length('minutes');
-
+	$: computedStartTimeFormatted = event.startTimeFormatted;
+	$: computedEndTimeFormatted = event.endTimeFormatted;
+	$: computedDuration = event.duration;
 </script>
 
 <div class="p-2" style="height:{zoomScale * event.duration}em">
 	<div class="mx-auto h-full w-full sm:w-1/2 md:w-1/3 bg-slate-200 p-2 rounded-md border border-slate-400 {event.type}">
 		<div class="flex">
 			<span class="grow text-lg font-medium">
-				<input type="text" class="w-full" bind:value={event.name}/>
+				<input type="text" class="w-full" bind:value={eventInput.name}/>
 			</span>
 			<span>
-				<TimeInput bind:time={event.startTime}></TimeInput>–<TimeInput bind:time={event.endTime}></TimeInput>
+				<TimeInput bind:time={eventInput.startTime}></TimeInput>–<TimeInput bind:time={eventInput.endTime}></TimeInput>
 			</span>
 		</div>
 		<div>
-			Duration: <DurationInput bind:duration={event.duration}/>
+			Duration: <DurationInput bind:duration={eventInput.duration}/>
 		</div>
 		<div class="lowercase">
 			{computedStartTimeFormatted}<br>{computedEndTimeFormatted}
