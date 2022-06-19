@@ -4,7 +4,7 @@
 	import DurationInput from "../lib/DurationInput.svelte"
 	export let event = {};
 	export let zoomScale = 0.1;
-	const timeFormat = "h:mma";
+	const timeFormat = "h:mm a";
 
 	let computedStartTime;
   let startTry1;
@@ -31,7 +31,7 @@
 	$: computedEndTimeFormatted = computedEndTime.toFormat(timeFormat);
 
 	let computedDuration;
-	// $: computedDuration = 
+	$: computedDuration = computedEndTime.diff(computedStartTime, "minutes").toObject().minutes;
 
 </script>
 
@@ -50,6 +50,9 @@
 		</div>
 		<div class="lowercase">
 			{computedStartTimeFormatted}<br>{computedEndTimeFormatted}
+		</div>
+		<div>
+			{computedDuration} min
 		</div>
 	</div>
 </div>
